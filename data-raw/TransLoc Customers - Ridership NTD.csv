@@ -1,0 +1,153 @@
+"State","Contract ID","Agency ID","Slug Name","Agency/Facility Name","Contract Holder (if different than Facility Name)","Integration Type","Aliases","Agency Classification","Product(s) Purchased","NTDID","Name on NTD"
+"NY","1001","A","columbia","Columbia University","Academy Express, LLC","TransLoc",NA,"University","RealTime",NA,NA
+"MA","1002","A","bu","Boston University","Academy Express, LLC","TransLoc","BU","University","RealTime",NA,NA
+"NY","1003","A","nyu","New York University","Academy Express, LLC","TransLoc","NYU","University","RealTime, OnDemand, Traveler",NA,NA
+"NJ","1004","A","stevens","Stevens Institute of Technology","Academy Express, LLC","TransLoc",NA,"University","RealTime",NA,NA
+"NY","1005","A","adelphi","Adelphi University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"GA","1006","A","asfreeride","Atlantic Station Shuttles","Atlantic Station Master Owners' Association, Inc.","TransLoc","MOA","Commercial","RealTime",NA,NA
+"AL","1007","A","auburn","Auburn University",NA,"TransLoc",NA,"University","RealTime, Traveler",NA,NA
+"IN","1008","A","bsu","Ball State University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"CA","1009","A","biola","Biola University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MA","1010","A","bc","Boston College","FTM Corporation","TransLoc","Boston Coach","University","RealTime",NA,NA
+"OH","1011","A","bgsu","Bowling Green State University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MA","1012","A","brandeis","Brandeis University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MD","1013","A","jhu","Johns Hopkins University","Broadway Services, Inc.","TransLoc","JHU","University","RealTime",NA,NA
+"MD","1014","A","jhmi","Johns Hopkins Bayview Medical Center","Broadway Services, Inc.","TransLoc","Bayview","Medical Campus","RealTime",NA,NA
+"MD","1015","A","jhmi","Johns Hopkins Medical Institution","Broadway Services, Inc.","TransLoc","Johns Hopkins Medical Institute","Medical Campus","RealTime",NA,NA
+"RI","1016","A","brownshuttle","Brown University",NA,"TransLoc",NA,"University","RealTime, Traveler",NA,NA
+"PA","1017","A","bucknell","Bucknell University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"CA","1018","A","capitolcorridor","Capitol Corridor Joint Powers Authority",NA,"Amtrak",NA,"Municipal","RealTime",NA,NA
+"SC","1019","A","thecomet","Central Midlands Transit","Central Midlands Regional Transit Authority","TransLoc","The COMET","Municipal","RealTime",40141,"Central Midlands Regional Transit Authority"
+"CA","1020","A","chapman","Chapman University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MA","1021","A","chb","Children's Hospital Boston",NA,"TransLoc","CHB","Medical Campus","RealTime",NA,NA
+"CAN","1022","A","airdrietransit","City of Airdrie",NA,"TransLoc",NA,"Municipal","RealTime",NA,NA
+"FL","1023","A","ufl","Regional Transit System","City of Gainesville - also in University of Florida contract","TransLoc","RTS","Municipal","RealTime",40030,"Gainseville Regional Transit System"
+"TX","1024","A","ccrta","Corpus Christi Regional Transportation Authority",NA,"Clever","Corpus Christi","Municipal","RealTime",60051,"Corpus Christi Regional Transportation Authority"
+"NC","1025","A","duke","Duke University",NA,"TransLoc",NA,"University","RealTime, Traveler, OnDemand",NA,NA
+"CT","1026","A","easternct","Eastern Connecticut State University",NA,"TransLoc","ECSU","University","RealTime",NA,NA
+"GA","1027","A","emory","Emory University",NA,"TransLoc",NA,"University","RealTime, OnDemand, Traveler",NA,NA
+"CT","1028","A","fairfield","Fairfield University",NA,"Zonar",NA,"University","RealTime",NA,NA
+"CA","1029","A","cerritos","Cerritos on Wheels","First Transit, Inc.","TransLoc",NA,"Municipal","RealTime",90036,"Orange County Transportation Authority"
+"MO","1030","A","indebus","Independence Transit","First Transit, Inc.","TransLoc","IndeBus Transit System","Municipal","RealTime",70005,"Kansas City Area Transportation Authority"
+"GA","1031","A","kennesaw","Kennesaw State University","First Transit, Inc.","TransLoc",NA,"University","RealTime",NA,NA
+"LA","1032","A","lsu","Louisiana State University","First Transit, Inc.","TransLoc","LSU","University","RealTime, Traveler, OnDemand",NA,NA
+"WI","1033","A","monona","Monona Express","First Transit, Inc.","Zonar",NA,"Municipal","RealTime",NA,NA
+"NJ","1034","A","princeton","Princeton University","First Transit, Inc.","TransLoc",NA,"University","RealTime, OnDemand",NA,NA
+"RI","1035","A","risd","Rhode Island School of Design","First Transit, Inc.","TransLoc","RISD","University","RealTime",NA,NA
+"NY","1036","A","rit","Rochester Institute of Technology","First Transit, Inc.","TransLoc","RIT","University","RealTime",NA,NA
+"GA","1037","A","scad","Savannah College of Art & Design","First Transit, Inc.","TransLoc","SCAD - Atlanta, SCAD - Savannah","University","RealTime",NA,NA
+"GA","1037","B","scadatl","Savannah College of Art & Design-Atlanta","First Transit, Inc.","TransLoc",NA,"University","RealTime",NA,NA
+"IL","1038","A","uchicago","The University of Chicago","First Transit, Inc.","TransLoc","UChicago","University","RealTime",NA,NA
+"AL","1039","A","uab","The University of Alabama at Birmingham","First Transit, Inc.","TransLoc","UAB","University","RealTime, OnDemand",NA,NA
+NA,"1127","A",NA,NA,NA,"TransLoc",NA,NA,NA,NA,NA
+"NY","1040","A","rochester","University of Rochester","First Transit, Inc.","TransLoc","U of R","University","RealTime",NA,NA
+"TN","1041","A","utk","University of Tennessee","First Transit, Inc.","TransLoc","UTK","University","RealTime, OnDemand",NA,NA
+NA,"1133","A",NA,NA,NA,"TransLoc",NA,NA,NA,NA,NA
+"FL","1042","A","fiu","Florida International University","The Florida International Board of Trustees","TransLoc",NA,"University","RealTime, Traveler",NA,NA
+"FL","1043","A","fsu","Florida State University",NA,"Trapeze","FSU, StarMetro-City of Tallahassee","University","RealTime, Traveler",NA,NA
+"FL","1043","B","starmetro","StarMetro","Florida State University","Trapeze",NA,"Municipal","Traveler",40036,"City of Tallahassee"
+"NY","1044","A","fordham","Fordham University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"NC","1045","A","hpu","High Point University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"NC","1046","A","jacksonvilletransit","Jacksonville Transit","City of Jacksonville","TransLoc",NA,"Municipal","RealTime",40040,"Jacksonville Transportation Authority"
+"CA","1047","A","cgtsnet","Netflix Corporate Campus","Corinthian International Parking Services, Inc.","TransLoc","CGTSNET","Commercial","RealTime",NA,NA
+"CA","1048","A","cgtstmi","Tesla, Inc. Employee Shuttle","Corinthian International Parking Services, Inc.","TransLoc","CGTSTMI","Commercial","RealTime",NA,NA
+"FL","1049","A","ju","Jacksonville University",NA,"ISR",NA,"University","RealTime",NA,NA
+"VA","1050","A","jrtco","Capital One Corporate Campus, VA","James River Transportation/ James River Bus Lines","TransLoc",NA,"Commercial","RealTime",NA,NA
+"RI","1051","A","jwu","Johnson & Wales University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"RI","1051","B","jwunmi","Johnson & Wales University: North Miami Campus",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"DE","1052","A","krapfco","Capital One - Wilmington, DE","Krapf's Coaches","TransLoc","KrapfCO","Commercial","RealTime",NA,NA
+"TX","1053","A","lamar","Lamar University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"GA","1054","A","redbus","Coca-Cola Corporate Campus","Lanier Shuttle and Valet, Inc.","TransLoc","Red Bus","Commercial","RealTime",NA,NA
+"GA","1055","A","lsvsfatl","State Farm Corporate Campus","Lanier Shuttle and Valet, Inc.","TransLoc","SF Perimeter","Commercial","RealTime",NA,NA
+"LA","1056","A","lsu","Louisiana State University (expires 07/16)",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MI","1057","A","ltu","Lawrence Technological University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"GA","1058","A","life","Life University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MA","1059","A","vtamv","Martha's Vineyard Transit Authority",NA,"TransLoc","MVTA","Municipal","RealTime",10129,"Massachusetts Department of Transportation"
+"NC","1060","A","hpmkt","High Point Furniture Market","McLaurin Parking","TransLoc",NA,"Commercial","RealTime",NA,NA
+"TN","1061","A","matatransit","Memphis Area Transit Authority",NA,"ORB CAD","MATA","Municipal","RealTime",40003,"Memphis Area Transit Authority"
+"GA","1062","A","mercer","Mercer University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"DC","1063","A","midparkco","Capital One - Washington, DC","MidPark Services, Inc.","TransLoc","MidParkCO","Commercial","RealTime",NA,NA
+"PA","1064","A","mccc","Montgomery County Community College",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MD","1065","A","morgan","Morgan State University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"MA","1066","A","nrta","Nantucket Regional Transit Authority",NA,"TransLoc","NRTA Wave","Municipal","RealTime, Traveler",10129,"Massachusetts Department of Transportation"
+"NM","1067","A","nmdotparkandride","NMDOT Park and Ride","New Mexico Department of Transportation","Temeda",NA,"Municipal","RealTime",NA,"New Mexico Department of Transportation"
+"NC","1068","A","ncsu","North Carolina State University",NA,"TransLoc","Wolfline, NCSU","University","RealTime",40147,NA
+"AZ","1069","A","mountainlink","NAIPTA Mountain Line","Northern Arizona Intergovernmental Public Transportation Authority","TransLoc",NA,"Municipal","RealTime",90219,"Northern Arizona Intergovernmental Public Transportation Authority"
+"AZ","1070","A","nau","Northern Arizona University","Arizona Board of Regents","Zonar","NAU","University","RealTime",NA,NA
+"MA","1071","A","nibr","Novartis Institutes for BioMedical Research, Inc.",NA,"TransLoc","NIBR","Commercial","RealTime",NA,NA
+"NJ","1072","A","novartis","Novartis Pharmaceutical Corp.",NA,"TransLoc","Novartis","Commercial","RealTime",NA,NA
+"NY","1073","A","nyu","NYU Langone Medical Center","NYU Hospitals Center","TransLoc","NYU Medical Ferry","Medical Campus","RealTime",NA,NA
+"MI","1074","A","oakland","Oakland University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"OH","1075","A","osumed","The Ohio State University",NA,"TransLoc","Ohio State University Medical Center","University","RealTime",NA,NA
+"GA","1076","A","catbus","CATBus (Clemson Area Transit)","Passio Technologies, Inc.","Passio",NA,"Municipal","Traveler",40208,"City of Clemson/Clemson Area Transit"
+"PA","1077","A","pennstatehershey","Penn State Hershey Medical Center",NA,"TransLoc",NA,"Medical Campus","RealTime",NA,NA
+"PA","1078","A","philau","Philadelphia University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"NC","1079","A","part","PART","Piedmont Authority for Regional Transportation","TransLoc",NA,"Municipal","RealTime",40173,"Piedmont Authority for Regional Transportation"
+"MA","1080","A","harvard","Harvard University","President and Fellows of Harvard College","TransLoc","MASCO","University","RealTime",NA,NA
+"MA","1080","B","masco","MASCO","President and Fellows of Harvard College","TransLoc",NA,"Medical Campus","RealTime",NA,NA
+"CT","1081","A","quinnipiac","Quinnipiac University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"RI","1082","A","ric","Rhode Island College","Professional Security Services","TransLoc","RIC","University","RealTime",NA,NA
+"PA","1083","A","mansfield","Mansfield University","River Valley Transit","TransLoc",NA,"University","RealTime",NA,NA
+"PA","1084","A","rmu","Robert Morris University",NA,"TransLoc","RMU","University","RealTime",NA,NA
+"GA","1085","A","rwwl","Robert W. Woodruff Library","Robert W. Woodruff Library of the Atlanta University Center, Inc.","Cradlepoint","AUC","University","RealTime",NA,NA
+"HI","1086","A","mauibus","County of Maui-Transportation Department","Roberts Hawaii, Inc.","TransLoc","Maui Bus","Municipal","RealTime",90241,"County of Maui - Dept. of Transportation"
+"PA","1087","A","sju","Saint Joseph's University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"CA","1088","A","vta","Santa Clara Valley Transportation Authority","SinglePoint Communications, Inc.","SinglePoint","VTA","Municipal","RealTime",90013,"Santa Clara Valley Transportation Authority"
+"IL","1089","A","siuc","Southern Illinois University, Carbondale","Beck Bus Transportation Corp","TransLoc","SIUC, Durham School Services","University","RealTime, Traveler",NA,NA
+"PA","1090","A","swarthmore","Swathmore College",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"TX","1091","A","tcu","Texas Christian University",NA,"TransLoc","TCU","University","RealTime",NA,NA
+"AL","1092","A","ua","The University of Alabama, Tuscaloosa","The Board of Trustees of the University of Alabama","TransLoc","UA","University","RealTime, Traveler",NA,NA
+"AZ","1093","A","arizona","The University of Arizona","Arizona Board of Regents","TransLoc",NA,"University","RealTime",NA,NA
+"MA","1094","A","umb","University of Massachusetts Boston",NA,"TransLoc","UMass Boston","University","RealTime",NA,NA
+"OH","1095","A","utoledo","The University of Toledo",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"VT","1096","A","uvm","The University of Vermont",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"NY","1097","A","transtarco","Capital One - Deer Park, NY","Tran-Star Executive International Transportation Services, Inc.","TransLoc","Tran-Star Limo, TranstarCO","Commercial","RealTime",NA,NA
+"KY","1098","A","lextran","Lextran","Transit Authority of Lexington-Fayette Urban County Government","Avail Tech",NA,"Municipal","Rider, Traveler",40017,"Lexington Transit Authority"
+"FL","1099","A","transtar","Disney Housing - Orlando, FL","Transtar Transportation Group","Cradlepoint","Transtar","Commercial","RealTime",NA,NA
+"NC","1100","A","tt","GoTriangle","Research Triangle Regional Public Transportation Authority","Clever","Triangle Transit","Municipal","RealTime",40108,"Research Triangle Regional Public Transportation"
+"NC","1100","B","cat","GoRaleigh","Research Triangle Regional Public Transportation Authority","Clever","Triangle Transit","Municipal","RealTime",40007,"Capital Area Transit"
+"NC","1100","C","ctran","Cary Transit","Research Triangle Regional Public Transportation Authority","Clever","Triangle Transit","Municipal","RealTime",40143,"Town of Cary"
+"NC","1100","D","data","GoDurham","Research Triangle Regional Public Transportation Authority","Clever","Triangle Transit, DATA Bus","Municipal","RealTime",40087,"Durham Area Transit Authority"
+"NC","1100","E","cht","Chapel Hill Transit","Research Triangle Regional Public Transportation Authority","NextBus","Triangle Transit","Municipal","RealTime",40051,"Chapel Hill Transit"
+"KY","1102","A","uky","University of Kentucky",NA,"TransLoc","UKY","University","RealTime, Traveler, OnDemand",NA,NA
+"MD","1103","A","umbc","The University of Maryland, Baltimore County",NA,"TransLoc","UMBC","University","RealTime, Traveler",NA,NA
+"TN","1104","A","memphis","University of Memphis","Groome Transportation, Inc.","TransLoc",NA,"University","RealTime",NA,NA
+"CT","1105","A","newhaven","University of New Haven",NA,"DATTCO/ Zonar",NA,"University","RealTime",NA,NA
+"AL","1106","A","una","University of North Alabama",NA,"TransLoc","UNA","University","RealTime",NA,NA
+"FL","1107","A","unf","University of North Florida","Academy Express, LLC","ISR","UNF","University","RealTime",NA,NA
+"FL","1108","A","uwf","University of West Florida Main Campus",NA,"TransLoc","UWF","University","RealTime",NA,NA
+"AUS","1109","A","uws","University of Western Sydney",NA,"Zonar","UWS","University","RealTime",NA,NA
+"WY","1110","A","uwyo","University of Wyoming",NA,"Zonar","Roundup","University","RealTime",NA,NA
+"CA","1111","A","sjc","San Jose International Airport","Transdev (formerly Veolia Transportation)","TransLoc","San Jose, Mineta International Airport","Municipal","RealTime",NA,NA
+"VA","1112","A","vcu","Virginia Commonwealth University","Groome Transportation, Inc.","Zonar","VCU","University","RealTime",NA,NA
+"MA","1113","A","cc","Beacon Hill Properties","VPNE Parking Solutions, LLC","TransLoc","Channel Center","Commercial","RealTime",NA,NA
+"MA","1114","A","sscc","State Street Corporation's Campus","VPNE Parking Solutions, LLC","TransLoc","State Street","Commercial","RealTime",NA,NA
+"PA","1115","A","widener","Widener University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"CT","1116","A","yale","Yale University",NA,"TransLoc",NA,"University","RealTime",NA,NA
+"IL","1117","A","cta","Chicago Transit Authority","University of Chicago","Clever","CTA","Municipal","RealTime",50066,"Chicago Transit Authority"
+"NC","1118","A","coe","NCSU College of Engineering",NA,"TransLoc","NCSU COE","University","RealTime",NA,NA
+"GA","1119","A","pmrg","PM Realty Group","Lanier Shuttle and Valet, Inc.","TransLoc",NA,"Commercial","RealTime",NA,NA
+"FL","1120","A","ufl","University of Florida","University of Florida Board of Trustees","TransLoc","UFL","University","RealTime",NA,NA
+"VA","1121","A","uva","University of Virginia","NAIPTA Piggyback","Zonar","UVA","University","RealTime, OnDemand",NA,NA
+"AL","1122","A","aamubts","Alabama A&M University",NA,"TransLoc","AAMU, A&M","University","RealTime",NA,NA
+"NC","1123","A","fast","Fayetteville Area System Transit","City of Fayetteville","TransLoc","FAST","Municipal","RealTime",40009,"Fayetteville Area System Transit"
+"NJ","1125","A","rowanshuttle","Rowan University",NA,"TransLoc","Rowan","University","RealTime",NA,NA
+"WA","1126","A","eastgate","TransWest-REI Corporate Campus","Parking & Transportation Management Services, LLC","SinglePoint","Eastgate","Commercial","RealTime, Traveler",NA,NA
+"AL","1128","A","them","The M Transit System","City of Montgomery","TransLoc","The M","Municipal","RealTime",40044,"City of Montgomery-Montgomery Area Transit System"
+"NJ","1129","A","njcu","New Jersey City University","First Transit, Inc.","TransLoc","NJCU","University","RealTime",NA,NA
+"GA","1130","A","gsu","Georgia State University",NA,"TransLoc","GSU, Panther Ambassadors","University","RealTime",NA,NA
+"MD","1131","A","theshuttle","TD Shuttle","Transdev North America, Inc.","TransLoc","Transdev, UnderArmour","Commercial","RealTime",NA,NA
+"MD","1132","A","umd","University of Maryland, College Park",NA,"TransLoc","UMD, UMDCP","University","OnDemand",NA,NA
+"FL","1134","A","not yet assigned","Florida Agricultural and Mechanical University",NA,"TransLoc","FAMU","University","RealTime",NA,NA
+"IL","1135","A","qcmetro","MetroLINK","Rock Island County Metropolitan Mass Transit District","INIT","QuadCities MetroLINK","Municipal","Rider, Traveler",50057,"Rock Island County Metropolitan Mass Transit District"
+"NY","1136","A","bny","Brooklyn Navy Yard Development Corp.",NA,"TransLoc","BNYDC, BNY","Commercial","RealTime",NA,NA
+"NC","1137","A","linktransit","Link Transit","City of Burlington","TransLoc",NA,"Municipal","RealTime",NA,NA
+"NC","1138","A","not yet assigned","Greensboro Transit Authority","City of Greensboro","TransLoc","GTA","Municipal","RealTime",40093,"Greensboro Transit Authority"
+"GA","1139","A","not yet assigned","Chick-fil-A",NA,"TransLoc",NA,"Commercial","RealTime",NA,NA
+"GA","1140","A","not yet assigned","Concourse Shuttle","Lanier Shuttle and Valet, Inc.","TransLoc",NA,"Commercial","RealTime",NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Total agencies:","144",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+"Total integrations:","#REF!",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
