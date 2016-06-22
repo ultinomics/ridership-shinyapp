@@ -54,8 +54,9 @@ sub_df %<>% select(ymd, agency, tos, modes, upt)
 
 
 empty <- sub_df %>% select(ymd) %>%
-            distinct() %>% cbind(NA)
-         xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
+  distinct %>%
+  mutate(none = NA)
+xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
 dygraph(xts_df)
 
 # get xts frame

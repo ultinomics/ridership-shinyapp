@@ -9,6 +9,7 @@ library(tidyr)
 library(lubridate)
 library(lazyeval)
 library(scales)
+options(scipen=999)
 
 df <- readRDS('data/ntdb.rds')
 
@@ -28,7 +29,7 @@ ui <- fluidPage(
          selectInput(inputId = "agency",
             label = "Agency",
             choices = c(Choose="", df$agency %>% table %>% names),
-            selected = "Durham Area Transit Authority"
+            selected = "Durham Area Transit Authority",
             selectize = TRUE
          )
       ),
@@ -65,7 +66,7 @@ server <- function(input, output, rds = TRUE) {
    output$MODES <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
       modes <- sub_df$modes %>% unique %>% na.omit() %>% c
-      checkboxGroupInput('modes', 'Choose Modes', modes)
+      checkboxGroupInput('modes', 'Choose Modes', modes, selected = modes)
    })
 
    output$DYGRAPH <- renderDygraph({
@@ -94,9 +95,9 @@ server <- function(input, output, rds = TRUE) {
              dyRangeSelector() %>%
              dyOptions(colors = clrs, fillGraph = TRUE, fillAlpha = 0.4)
       } else {
-         sub_df %<>% slice(which(modes %in% input$modes))
          empty <- sub_df %>% select(ymd) %>%
-            distinct() %>% cbind(NA)
+           distinct %>%
+           mutate(modes = as.numeric(NA))
          xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
          dygraph(xts_df)
       }
