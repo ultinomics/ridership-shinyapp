@@ -58,9 +58,11 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 	  summarize(n_modes = n_distinct(Modes))
 
 	# Make long version
-
 	long_df <- id_df %>%
 	  gather(key = 'month_key', value = 'UPT', JAN02:MAR16) # BEWARE - this is hardcoded
+	# lowercase
+	names(long_df) <- names(long_df) %>% tolower
+	names(long_df) <- str_replace_all(names(long_df), '[[:punct:]]|[ ]', '_')
 
 	# Check that conversion has expected dimensions
 	n_months <- 171
@@ -69,21 +71,25 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 	# Look for missing values
 
 	missing_df <- long_df %>%
-	  group_by(NTDID, Modes) %>%
-	  summarize(n_missing = sum(is.na(UPT)))
+	  group_by(ntdid, modes) %>%
+	  summarize(n_missing = sum(is.na(upt)))
 
-	# Clean up and create variables -------------------------------------------
+	# clean up and create variables -------------------------------------------
 
 	long_df$month <- substr(long_df$month_key, start = 1, stop = 3)
 	long_df$year <- substr(long_df$month_key, start = 4, stop = 6)
 	long_df$date <- paste0(long_df$month, ' 01 20', long_df$year)
 	long_df$dt <- mdy(long_df$date)
-
-	names(long_df) <- names(long_df) %>% tolower
-	names(long_df) <- str_replace_all(names(long_df), '[[:punct:]]|[ ]', '_')
 	long_df %<>% rename(ymd = dt)
 
+	# trim agency names
+	long_df$agency <- long_df %>%
+		select(agency) %>%
+		separate(agency, paste(1:2), ",", extra = "merge") %>%
+		extract2('1')
+
 	long_df
+
 }
 
 #' Exports the output of `import_ridership_data()`
