@@ -112,6 +112,7 @@ server <- function(input, output, rds = TRUE) {
 
    output$UZA <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
+      sub_df %<>% slice(which(tos_desc %in% input$tos_desc))
       uza <- sub_df$uza %>% unique %>% c
       if(length(uza) != sum(is.na(uza))) {
          selectInput('uza', 'Select Urbanized Area Number', uza, selectize = FALSE)
@@ -120,8 +121,11 @@ server <- function(input, output, rds = TRUE) {
       }
    })
 
+   # TODO!! instead of removing NAs, make sure we have all descriptions...
    output$MODES <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
+      sub_df %<>% slice(which(tos_desc %in% input$tos_desc))
+      sub_df %<>% slice(which(uza %in% input$uza))
       modes_desc <- sub_df$modes_desc %>% unique %>% na.omit %>% c
       checkboxGroupInput('modes_desc', 'Choose Modes', modes_desc, selected = modes_desc)
    })
@@ -142,7 +146,7 @@ server <- function(input, output, rds = TRUE) {
          sub_df %<>% select(ymd, agency, modes_desc, upt)
 
          # only plot if inputs exists
-         if(!is.null(input$modes_desc)) {
+         if(length(input$modes_desc) > 0) {
             sub_df %<>% slice(which(modes_desc %in% input$modes_desc))
 
             # get xts frame
