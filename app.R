@@ -78,7 +78,7 @@ body <- dashboardBody(
          )
       )
    )
-   , textOutput("out1")
+   # , textOutput("out1")
 )
 
 ui <- dashboardPage(
@@ -89,6 +89,15 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, rds = TRUE) {
+
+
+   # output$out1 <- renderPrint({
+   #    list(input$agency,
+   #       input$tos_desc,
+   #       input$uza,
+   #       input$modes_desc
+   #    )
+   # })
 
    output$TOS <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
@@ -113,20 +122,8 @@ server <- function(input, output, rds = TRUE) {
 
    output$MODES <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
-      modes_desc <- sub_df$modes_desc %>% unique %>% c
-      if(length(modes_desc) != sum(is.na(modes_desc))) {
-         checkboxGroupInput('modes_desc', 'Choose Modes', modes_desc, selected = modes_desc)
-      } else {
-         checkboxGroupInput('modes_desc', 'Choose Modes', NULL)
-      }
-   })
-
-   output$out1 <- renderPrint({
-      list(input$agency,
-         input$tos_desc,
-         input$uza,
-         input$modes_desc
-      )
+      modes_desc <- sub_df$modes_desc %>% unique %>% na.omit %>% c
+      checkboxGroupInput('modes_desc', 'Choose Modes', modes_desc, selected = modes_desc)
    })
 
    output$DYGRAPH <- renderDygraph({

@@ -106,6 +106,8 @@ clean_ridership_data <- function(DF) {
 
 	# remove if all upt are missing
 	long_df %<>% remove_if_all_na(., 'upt')
+
+	long_df
 }
 
 
@@ -148,14 +150,14 @@ remove_if_all_na <- function(DF, var) {
 
 	# Look for missing values
 	missing_df <- DF %>%
-	  group_by(ntdid, modes, uza) %>%
+	  group_by(ntdid, tos, modes, uza) %>%
 	  summarize_(n_missing = interp("sum(is.na(x))", x = as.name(var)), len = ~n()) %>%
 	  mutate(drop = (len == n_missing)) %>%
-	  select(ntdid, modes, uza, drop) %>%
+	  select(ntdid, tos, modes, uza, drop) %>%
 	  distinct
 
 	DF2 <- DF %>%
-		inner_join(missing_df, by = c('ntdid', 'modes', 'uza')) %>%
+		inner_join(missing_df, by = c('ntdid', 'tos', 'modes', 'uza')) %>%
 		slice(which(!drop)) %>%
 		select(-drop)
 
