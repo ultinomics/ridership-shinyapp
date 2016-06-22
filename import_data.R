@@ -19,6 +19,20 @@ options(scipen=999)
 #' @return tbl_df. A 'long' version of the ridership data.
 
 import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge_tloc = FALSE) {
+
+	attach_modes_desc <- function(DF) {
+		modes_df <- data_frame(modes = c("MB", "DR", "VP", "DT", "CB", "HR", "LR", "RB", "SR", "MG", "YR", "DB"), modes_desc = c("Motorbus ", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses"))
+		DF %>%
+		  left_join(., modes_df, by = 'modes')
+	}
+
+	attach_tos_desc <- function(DF) {
+		tos_df <- data_frame(tos = c("PT", "DO"),
+				tos_desc = c("Purchased Transportation", "Directly Operated"))
+		DF %>%
+		  left_join(., tos_df, by = 'tos')
+	}
+
 	files <- list.files(file.path(maindir, 'data-raw'), full.names=TRUE)
 	csvs <- sapply(files, readr::read_csv, simplify = FALSE)
 	nms <- names(csvs) %>% basename
@@ -88,7 +102,7 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 		separate(agency, paste(1:2), ",", extra = "merge") %>%
 		extract2('1')
 
-	long_df
+	long_df	%>% attach_tos_desc %>% attach_modes_desc
 
 }
 
