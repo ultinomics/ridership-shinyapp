@@ -95,11 +95,7 @@ server <- function(input, output, rds = TRUE) {
              dyRangeSelector() %>%
              dyOptions(colors = clrs, fillGraph = TRUE, fillAlpha = 0.4)
       } else {
-         empty <- sub_df %>% select(ymd) %>%
-           distinct %>%
-           mutate(modes = as.numeric(NA))
-         xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
-         dygraph(xts_df)
+         NULL
       }
    })
 
