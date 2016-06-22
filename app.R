@@ -21,7 +21,7 @@ assign_colors <- function(x) {
       sort(decreasing=TRUE) %>%
       names
    n <- 5
-   m <- 5
+   m <- 2
    top <- modes_desc %>% head(n)
    middle <- modes_desc[c((n+1):(length(modes_desc)-m))]
    bottom <- modes_desc %>% tail(m)
@@ -163,7 +163,7 @@ server <- function(input, output, rds = TRUE) {
                 main = sprintf('Type of Service: %s', input$tos_desc)) %>%
                 dyRangeSelector() %>%
                 dyOptions(colors = clrs(col_modes), fillGraph = TRUE, fillAlpha = 0.4) %>%
-                dyLegend(labelsDiv = "legendDivID", labelsSeparateLines = TRUE)
+                dyLegend(labelsDiv = "legendDivID", labelsSeparateLines = TRUE, show = 'always')
          } else {
             NULL
          }
