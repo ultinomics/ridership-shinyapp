@@ -12,67 +12,70 @@ library(scales)
 setwd("/Users/danton/GitHub/ridership-shinyapp")
 df <- readRDS('data/ntdb.rds')
 
-get_agency <- function(df, i) df$agency %>% table %>% names %>% extract2(i)
+extract_agency_df <- function(v, df) {
 
-# get inputs
-input <- list()
-input$agency <- get_agency(df, 2)
+  input <- list()
+  input$agency <- v
 
-sub_df <- df %>% slice(which(agency %in% input$agency))
+  input$modes_desc <- df %>%
+     slice(which(agency %in% input$agency)) %>%
+     extract2('modes_desc')%>%
+     table %>%
+     names
 
-input$modes <- df %>%
-   slice(which(agency %in% input$agency)) %>%
-   extract2('modes')%>%
-   table %>%
-   names
+  input$tos_desc <- df %>%
+     slice(which(agency %in% input$agency)) %>%
+     extract2('tos_desc')%>%
+     table %>%
+     names
 
-input$tos <- df %>%
-   slice(which(agency %in% input$agency)) %>%
-   extract2('tos')%>%
-   table %>%
-   names
+  input$uza <- df %>%
+     slice(which(agency %in% input$agency)) %>%
+     extract2('uza') %>%
+     unique
 
-input$uza <- df %>%
-   slice(which(agency %in% input$agency)) %>%
-   extract2('uza') %>%
-   unique
+  sub_df <- df %>% slice(which(agency %in% input$agency))
 
+  # reduce dataframe ONLY if we have inputs
+  if(!is.null(input$uza)) sub_df %<>% slice(which(uza %in% input$uza))
+  if(!is.null(input$tos_desc)) sub_df %<>% slice(which(tos_desc %in% input$tos_desc))
 
-if(!is.null(input$modes)) {
- sub_df %<>% slice(which(modes %in% input$modes))
+  sub_df %<>% select(ymd, agency, uza, tos_desc, modes_desc, upt)
+  sub_df
 }
 
-if(!is.null(input$uza)) {
- sub_df %<>% slice(which(uza %in% input$uza))
+sub_df <- extract_agency_df("Rural Reporters", df)
+
+# only plot if inputs exists
+if(!is.null(input$modes_desc)) {
+  sub_df %<>% slice(which(modes_desc %in% input$modes_desc))
+  sub_df %<>% select(ymd, agency, modes_desc, upt)
+
+  # get xts frame
+  DF <- sub_df %>%
+     spread(modes_desc, upt) %>%
+     select(-agency)
+  col_modes <- DF %>% select(-ymd) %>% names # get mode names (order matters; do before renaming)
+  xts_df <- as.xts(DF %>% select(-ymd), order.by = DF$ymd)
+
+  # note: `clrs(col_modes)` ensure consistent mapping by
+  dygraph(xts_df,
+      xlab = 'MM-YYYY',
+      ylab = 'Unlinked Passenger Trips',
+      main = sprintf('Type of Service: %s', input$tos_desc)) %>%
+      dyRangeSelector() %>%
+      dyOptions(colors = clrs(col_modes), fillGraph = TRUE, fillAlpha = 0.4) %>%
+      dyLegend(labelsDiv = "legendDivID", labelsSeparateLines = TRUE)
 }
 
-if(!is.null(input$tos)) {
- sub_df %<>% slice(which(tos %in% input$tos))
-}
+# label_modes <- function(x) {
+#    modes_desc <- c("Motorbus", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses")
+#    indx <- match(x, modes_desc)
+#    modes_desc[indx]
+# }
 
-sub_df %<>% select(ymd, agency, tos, modes, upt)
-
-
-empty <- sub_df %>% select(ymd) %>%
-  distinct %>%
-  mutate(none = as.numeric(NA))
-xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
-dygraph(xts_df)
-
-# get xts frame
-xts_dfs <- lapply(input$tos, function(x) {
-	DF <- sub_df %>%
-		slice(which(tos %in% x)) %>%
-    spread(modes, upt) %>%
-    select(-agency, -tos)
-	as.xts(DF %>% select(-ymd), order.by = DF$ymd)
-})
-
-dys <- lapply(seq_along(xts_dfs), function(i) {
-   dygraph(xts_dfs[[i]],
-    xlab = 'MM-YYYY',
-    ylab = 'Unlinked Passenger Trips',
-    main = sprintf('Type of Service: %s', input$tos[i])) %>%
-    dyRangeSelector() %>%
-    dyOptions(fillGraph = TRUE, fillAlpha = 0.4)
-})
+# label_tos <- function(x) {
+#    tos_desc <- c("Purchased Transportation", "Directly Operated")
+#    indx <- match(x, tos_desc)
+#    tos_desc[indx]
+# }

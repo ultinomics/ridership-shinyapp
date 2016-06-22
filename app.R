@@ -33,20 +33,7 @@ assign_colors <- function(x) {
    clrs[indx]
 }
 
-label_modes <- function(x) {
-   modes_desc <- c("Motorbus ", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses")
-   indx <- match(x, modes_desc)
-   modes_desc[indx]
-}
-
-label_tos <- function(x) {
-   tos_desc <- c("Purchased Transportation", "Directly Operated")
-   indx <- match(x, tos_desc)
-   tos_desc[indx]
-}
-
 # save function envirs
-rename_cols <- label_modes
 clrs <- assign_colors
 
 ## UI SET UP
@@ -91,6 +78,7 @@ body <- dashboardBody(
          )
       )
    )
+   , textOutput("out1")
 )
 
 ui <- dashboardPage(
@@ -104,27 +92,57 @@ server <- function(input, output, rds = TRUE) {
 
    output$TOS <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
-      tos_desc <- sub_df$tos_desc %>% unique %>% na.omit() %>% c
+      tos_desc <- sub_df$tos_desc %>% unique %>% c
       selectInput('tos_desc', 'Select Service Type', tos_desc, selectize = FALSE)
+      if(length(tos_desc) != sum(is.na(tos_desc))) {
+         selectInput('tos_desc', 'Select Urbanized Area Number', tos_desc, selectize = FALSE)
+      } else {
+         selectInput('tos_desc', 'Select Urbanized Area Number', NULL, selectize = FALSE)
+      }
    })
+
    output$UZA <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
-      uza <- sub_df$uza %>% unique %>% na.omit() %>% c
-      selectInput('uza', 'Select Urbanized Area Number', uza, selectize = FALSE)
+      uza <- sub_df$uza %>% unique %>% c
+      if(length(uza) != sum(is.na(uza))) {
+         selectInput('uza', 'Select Urbanized Area Number', uza, selectize = FALSE)
+      } else {
+         selectInput('uza', 'Select Urbanized Area Number', NULL, selectize = FALSE)
+      }
    })
 
    output$MODES <- renderUI({
       sub_df <- df %>% slice(which(agency %in% input$agency))
-      modes_desc <- sub_df$modes_desc %>% unique %>% na.omit() %>% c
-      checkboxGroupInput('modes_desc', 'Choose Modes', modes_desc, selected = modes_desc)
+      modes_desc <- sub_df$modes_desc %>% unique %>% c
+      if(length(modes_desc) != sum(is.na(modes_desc))) {
+         checkboxGroupInput('modes_desc', 'Choose Modes', modes_desc, selected = modes_desc)
+      } else {
+         checkboxGroupInput('modes_desc', 'Choose Modes', NULL)
+      }
+   })
+
+   output$out1 <- renderPrint({
+      list(input$agency,
+         input$tos_desc,
+         input$uza,
+         input$modes_desc
+      )
    })
 
    output$DYGRAPH <- renderDygraph({
       withProgress(message = "Loading...", {
-         sub_df <- df %>% slice(which(agency %in% input$agency)) %>%
-            slice(which(uza %in% input$uza)) %>%
-            slice(which(tos_desc %in% input$tos_desc)) %>%
-            select(ymd, agency, modes_desc, upt)
+         sub_df <- df %>% slice(which(agency %in% input$agency))
+
+         # reduce dataframe ONLY if we have inputs. if NULL, reduce and remove duplicates
+         if(any(is.null(input$uza), is.null(input$tos_desc))) {
+            sub_df %<>% arrange(ymd, upt) %>% distinct(ymd, agency, uza, tos_desc, modes_desc)
+         } else {
+            if(!is.null(input$uza)) sub_df %<>% slice(which(uza %in% input$uza))
+            if(!is.null(input$tos_desc)) sub_df %<>% slice(which(tos_desc %in% input$tos_desc))
+         }
+
+         # remove data that is not used to plot
+         sub_df %<>% select(ymd, agency, modes_desc, upt)
 
          # only plot if inputs exists
          if(!is.null(input$modes_desc)) {
@@ -136,7 +154,6 @@ server <- function(input, output, rds = TRUE) {
                select(-agency)
             col_modes <- DF %>% select(-ymd) %>% names # get mode names (order matters; do before renaming)
             xts_df <- as.xts(DF %>% select(-ymd), order.by = DF$ymd)
-            names(xts_df) <- rename_cols(names(xts_df)) # rename acronym modes_desc to full descriptions
 
             # note: `clrs(col_modes)` ensure consistent mapping by
             dygraph(xts_df,

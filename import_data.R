@@ -5,6 +5,8 @@ library(tidyr)
 library(magrittr)
 library(lubridate)
 library(stringr)
+library(stringi)
+library(lazyeval)
 options(scipen=999)
 
 # Purpose -----------------------------------------------------------------
@@ -19,19 +21,6 @@ options(scipen=999)
 #' @return tbl_df. A 'long' version of the ridership data.
 
 import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge_tloc = FALSE) {
-
-	attach_modes_desc <- function(DF) {
-		modes_df <- data_frame(modes = c("MB", "DR", "VP", "DT", "CB", "HR", "LR", "RB", "SR", "MG", "YR", "DB"), modes_desc = c("Motorbus ", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses"))
-		DF %>%
-		  left_join(., modes_df, by = 'modes')
-	}
-
-	attach_tos_desc <- function(DF) {
-		tos_df <- data_frame(tos = c("PT", "DO"),
-				tos_desc = c("Purchased Transportation", "Directly Operated"))
-		DF %>%
-		  left_join(., tos_df, by = 'tos')
-	}
 
 	files <- list.files(file.path(maindir, 'data-raw'), full.names=TRUE)
 	csvs <- sapply(files, readr::read_csv, simplify = FALSE)
@@ -82,11 +71,13 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 	n_months <- 171
 	nrow(long_df) == n_months * nrow(id_df)
 
-	# Look for missing values
+	long_df
 
-	missing_df <- long_df %>%
-	  group_by(ntdid, modes) %>%
-	  summarize(n_missing = sum(is.na(upt)))
+}
+
+clean_ridership_data <- function(DF) {
+
+	long_df <- DF
 
 	# clean up and create variables -------------------------------------------
 
@@ -102,9 +93,22 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 		separate(agency, paste(1:2), ",", extra = "merge") %>%
 		extract2('1')
 
-	long_df	%>% attach_tos_desc %>% attach_modes_desc
+	long_df	%<>%
+		mutate(agency = stri_trans_totitle(agency)) %>%
+		attach_tos_desc %>%
+		attach_modes_desc
 
+	# remove missing agencies
+	long_df %<>% slice(which(!is.na(agency)))
+
+	# remove missing modes
+	long_df %<>% slice(which(!is.na(modes)))
+
+	# remove if all upt are missing
+	long_df %<>% remove_if_all_na(., 'upt')
 }
+
+
 
 #' Exports the output of `import_ridership_data()`
 #'
@@ -114,10 +118,46 @@ import_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp', merge
 
 export_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp/', rds = TRUE) {
 
-		df <- import_ridership_data(maindir = '~/GitHub/ridership-shinyapp/')
+		df <- import_ridership_data(maindir = '~/GitHub/ridership-shinyapp/') %>%
+			clean_ridership_data
 		if(rds) {
 			saveRDS(df, file.path(maindir, 'data', 'ntdb.rds'))
 		} else {
 			write.csv(df, file.path(maindir, 'data', 'ntdb.csv'), row.names = FALSE)
 		}
+}
+
+# UTILITY FUNCTIONS ------------------------------------------------
+
+attach_modes_desc <- function(DF) {
+	modes_df <- data_frame(modes = c("MB", "DR", "VP", "DT", "CB", "HR", "LR", "RB", "SR", "MG", "YR", "DB"), modes_desc = c("Motorbus", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses"))
+	DF %>%
+	  left_join(., modes_df, by = 'modes')
+}
+
+attach_tos_desc <- function(DF) {
+	tos_df <- data_frame(tos = c("PT", "DO"),
+			tos_desc = c("Purchased Transportation", "Directly Operated"))
+	DF %>%
+	  left_join(., tos_df, by = 'tos')
+}
+
+
+#' drops the agency, mode, uza rows if ALL `var` are missing
+remove_if_all_na <- function(DF, var) {
+
+	# Look for missing values
+	missing_df <- DF %>%
+	  group_by(ntdid, modes, uza) %>%
+	  summarize_(n_missing = interp("sum(is.na(x))", x = as.name(var)), len = ~n()) %>%
+	  mutate(drop = (len == n_missing)) %>%
+	  select(ntdid, modes, uza, drop) %>%
+	  distinct
+
+	DF2 <- DF %>%
+		inner_join(missing_df, by = c('ntdid', 'modes', 'uza')) %>%
+		slice(which(!drop)) %>%
+		select(-drop)
+
+	DF2
 }
