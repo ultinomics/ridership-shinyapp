@@ -14,12 +14,26 @@ options(scipen=999)
 df <- readRDS('data/ntdb.rds')
 
 assign_colors <- function(x) {
-   set.seed(1789)
-   modes <- df$modes %>% unique %>% na.omit %>% c %>% sample
-   clrs <- hue_pal()(length(modes))
-   indx <- which(modes %in% x)
+   modes <- df %>%
+      na.omit %>%
+      select(modes) %>%
+      table %>%
+      sort(decreasing=TRUE) %>%
+      names
+   n <- 5
+   m <- 5
+   top <- modes %>% head(n)
+   middle <- modes[c((n+1):(length(modes)-m))]
+   bottom <- modes %>% tail(m)
+   clrs1 <- brewer_pal("qual", "Set1")(length(top))
+   clrs2 <- brewer_pal("qual", "Set3")(length(middle))
+   clrs3 <- grey_pal()(length(bottom))
+   clrs <- c(clrs1, clrs2, clrs3)
+   indx <- match(x, modes)
    clrs[indx]
 }
+
+clrs <- assign_colors
 
 ui <- fluidPage(
    titlePanel("National Transit Database: Ridership"),
@@ -79,21 +93,20 @@ server <- function(input, output, rds = TRUE) {
       if(!is.null(input$modes)) {
          sub_df %<>% slice(which(modes %in% input$modes))
 
-         # get colors
-         clrs <- assign_colors(input$modes)
-
          # get xts frame
          DF <- sub_df %>%
             spread(modes, upt) %>%
             select(-agency)
+         col_modes <- DF %>% select(-ymd) %>% names # get mode names
          xts_df <- as.xts(DF %>% select(-ymd), order.by = DF$ymd)
 
+         # note: `clrs(col_modes)` ensure consistent mapping by
          dygraph(xts_df,
              xlab = 'MM-YYYY',
              ylab = 'Unlinked Passenger Trips',
              main = sprintf('Type of Service: %s', input$tos)) %>%
              dyRangeSelector() %>%
-             dyOptions(colors = clrs, fillGraph = TRUE, fillAlpha = 0.4)
+             dyOptions(colors = clrs(col_modes), fillGraph = TRUE, fillAlpha = 0.4)
       } else {
          NULL
       }
