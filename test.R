@@ -55,7 +55,7 @@ sub_df %<>% select(ymd, agency, tos, modes, upt)
 
 empty <- sub_df %>% select(ymd) %>%
   distinct %>%
-  mutate(none = NA)
+  mutate(none = as.numeric(NA))
 xts_df <- as.xts(empty %>% select(-ymd), order.by = empty$ymd)
 dygraph(xts_df)
 
