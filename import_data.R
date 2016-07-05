@@ -132,7 +132,10 @@ export_ridership_data <- function(maindir = '~/GitHub/ridership-shinyapp/', rds 
 # UTILITY FUNCTIONS ------------------------------------------------
 
 attach_modes_desc <- function(DF) {
-	modes_df <- data_frame(modes = c("MB", "DR", "VP", "DT", "CB", "HR", "LR", "RB", "SR", "MG", "YR", "DB"), modes_desc = c("Motorbus", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses"))
+	modes_df <- data_frame(
+		modes = c("MB", "DR", "VP", "DT", "CB", "HR", "LR", "RB", "SR", "MG", "YR", "DB", "TB", "CR", "FB", "AR", "TR", "OR", "IP", "PB", "CC", "AG", "MO"),
+		modes_desc = c("Motorbus", "Demand Response", "Vanpool", "Demand Response-Taxi", "Commuter Bus", "Heavy Rail", "Light Rail", "Bus Rapid Transit", "Streetcar", "Monorail/Automated Guideway", "Hybrid Rail", "Double Decker Buses", "Trolleybus", "Commuter Rail", "Ferryboat", "Alaska Railroad", "Aerial Tramway", "Over-the-Road Bus", "Inclined Plane", "Publico (non-rail mode)", "Cable Car", "Automated Guideway", "Monorail")
+	)
 	DF %>%
 	  left_join(., modes_df, by = 'modes')
 }

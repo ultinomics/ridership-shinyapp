@@ -8,7 +8,6 @@ library(dygraphs)
 library(xts)
 library(tidyr)
 library(lubridate)
-library(scales)
 options(scipen=999)
 
 df <- readRDS('data/ntdb.rds')
@@ -21,7 +20,7 @@ assign_colors <- function(x) {
       sort(decreasing=TRUE) %>%
       names
    n <- 5
-   m <- 2
+   m <- 5
    top <- modes_desc %>% head(n)
    middle <- modes_desc[c((n+1):(length(modes_desc)-m))]
    bottom <- modes_desc %>% tail(m)
@@ -104,9 +103,9 @@ server <- function(input, output, rds = TRUE) {
       tos_desc <- sub_df$tos_desc %>% unique %>% c
       selectInput('tos_desc', 'Select Service Type', tos_desc, selectize = FALSE)
       if(length(tos_desc) != sum(is.na(tos_desc))) {
-         selectInput('tos_desc', 'Select Urbanized Area Number', tos_desc, selectize = FALSE)
+         selectInput('tos_desc', 'Type of Service', tos_desc, selectize = FALSE)
       } else {
-         selectInput('tos_desc', 'Select Urbanized Area Number', NULL, selectize = FALSE)
+         selectInput('tos_desc', 'Type of Service', NULL, selectize = FALSE)
       }
    })
 
